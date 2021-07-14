@@ -1,0 +1,6 @@
+/* ./src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~react-datepicker/dist/react-datepicker.css";
+@import 'react-toastify/dist/ReactToastify.css';
