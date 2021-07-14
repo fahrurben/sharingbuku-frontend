@@ -32,6 +32,7 @@ function Register() {
   }
 
   useEffect(() => {
+    dispatch(resetForm());
     dispatch(fetchProvinces());
   }, []);
 
