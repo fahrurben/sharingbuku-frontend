@@ -5,11 +5,13 @@ import Register from '../pages/register/Register';
 import Login from '../pages/login/Login';
 import App from '../App';
 import Home from '../pages/home/Home';
+import UserProfile from '../pages/user/UserProfile';
 
 export default function Routes() {
   return (
     <Switch>
       <Route path="/register" exact component={Register} />
+      <Route path="/profile" exact component={UserProfile} isPrivate={true}/>
       <Route path="/" exact component={Home} isPrivate={true}/>
 
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}

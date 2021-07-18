@@ -79,8 +79,8 @@ export default function DefaultLayout({ children }) {
               {showProfile ?
                 (<ul className="absolute text-gray-700" style={{ top: '60px', left: '0px', right: '0px' }}>
                   <li>
-                    <a
-                       className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Test</a>
+                    <Link to="/profile"
+                       className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">{t('My Profile')}</Link>
                   </li>
                   <li>
                     <a onClick={logoutClicked}
