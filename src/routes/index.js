@@ -6,12 +6,14 @@ import Login from '../pages/login/Login';
 import App from '../App';
 import Home from '../pages/home/Home';
 import UserProfile from '../pages/user/UserProfile';
+import ChangePassword from '../pages/user/ChangePassword';
 
 export default function Routes() {
   return (
     <Switch>
       <Route path="/register" exact component={Register} />
       <Route path="/profile" exact component={UserProfile} isPrivate={true}/>
+      <Route path="/change_password" exact component={ChangePassword} isPrivate={true}/>
       <Route path="/" exact component={Home} isPrivate={true}/>
 
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}
