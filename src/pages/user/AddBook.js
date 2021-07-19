@@ -2,16 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import _ from 'lodash';
 import { toast } from 'react-toastify';
 import TextInput from '../../components/common/ui/form/TextInput';
 import { useTranslation } from 'react-i18next';
 import Button from '../../components/common/ui/Button';
-import AsyncSelect from 'react-select/async';
-import { FAILED, SUCCEEDED } from '../../constant';
-import DateInput from '../../components/common/ui/form/DateInput';
+import { FAILED, IDLE, SUCCEEDED } from '../../constant';
 import { setConfig, timeout } from '../../helpers/AjaxHelper';
-import { IDLE } from '../../constant';
 import ProfileSidebar from '../../components/common/ui/sidebar/ProfileSidebar';
 import axios from 'axios';
 import Select from '../../components/common/ui/form/Select';
@@ -23,7 +19,7 @@ const EXISTING = 'existing';
 const NEW = 'new';
 
 function AddBook() {
-  const { control, register, getValues, setValue, handleSubmit, errors: formErrors } = useForm();
+  const { control, register, getValues, handleSubmit, errors: formErrors } = useForm();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();
@@ -46,8 +42,7 @@ function AddBook() {
 
   const loadOptions = async (searchQuery) => {
     const response = await axios.get(`${baseUrl}/api/book/lookup?title=${searchQuery}`, setConfig());
-    let bookOptions = response.data.data?.map((book) => ({ value: book.id, label: book.title }));
-    return bookOptions;
+    return response.data.data?.map((book) => ({ value: book.id, label: book.title }));
   };
 
   function bookSelectionTypeChange(e) {
@@ -136,7 +131,7 @@ function AddBook() {
                   required="true"
                   inputRef={register({
                     validate: {
-                      requiredForNew: (value) => {
+                      requiredForNew: () => {
                         const { title } = getValues();
                         return bookSelectionType !== NEW || title !== '' || t('Title is required');
                       }
@@ -155,7 +150,7 @@ function AddBook() {
                   required="true"
                   inputRef={register({
                     validate: {
-                      requiredForNew: (value) => {
+                      requiredForNew: () => {
                         const { author } = getValues();
                         return bookSelectionType !== NEW || author !== '' || t('Author is required');
                       }
@@ -177,7 +172,7 @@ function AddBook() {
                   placeholder="- Category -"
                   inputRef={register({
                     validate: {
-                      requiredForNew: (value) => {
+                      requiredForNew: () => {
                         const { category_id } = getValues();
                         return bookSelectionType !== NEW || category_id !== '' || t('Category is required');
                       }
@@ -197,7 +192,7 @@ function AddBook() {
                   required="true"
                   inputRef={register({
                     validate: {
-                      requiredForNew: (value) => {
+                      requiredForNew: () => {
                         const { isbn } = getValues();
                         return bookSelectionType !== NEW || isbn !== '' || t('ISBN is required');
                       }
