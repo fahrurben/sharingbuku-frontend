@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const baseUrl = process.env.REACT_APP_API_BASE_URL;
-
 const initialState = {
   isLoading: false,
   error: null,
@@ -11,7 +9,7 @@ const globalSlice = createSlice({
   name: 'global',
   initialState: initialState,
   reducers: {
-    setLoading: (state, action) => {
+    setLoading: (state) => {
       state.isLoading = true;
     },
     setLoaded: (state) => {

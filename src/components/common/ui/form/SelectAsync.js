@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
-import ReactDatePicker from 'react-datepicker';
 import _ from 'lodash';
 import clsx from 'clsx';
 import AsyncSelect from 'react-select/async/dist/react-select.esm';
@@ -9,12 +8,6 @@ import AsyncSelect from 'react-select/async/dist/react-select.esm';
 function SelectAsync({
                      control, id, name, label, validationRules, required, error, loadOptions, defaultOptions
                    }) {
-  let styles = [
-    'appearance-none', 'block', 'w-full', 'bg-gray-100', 'text-gray-700', 'border', 'border-gray-100',
-    'focus:outline-none', 'rounded', 'py-2', 'px-4', 'mb-3',
-  ];
-  styles = error ? _.concat(styles, ['border-red-500']) : styles;
-  styles = clsx(styles);
 
   return (
     <div>
@@ -53,7 +46,7 @@ function SelectAsync({
 }
 
 SelectAsync.propTypes = {
-  control: PropTypes.func.isRequired,
+  control: PropTypes.object.isRequired,
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   label: PropTypes.string,

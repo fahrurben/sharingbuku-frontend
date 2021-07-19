@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
-import { setConfig, timeout } from '../../helpers/AjaxHelper';
+import { setConfig } from '../../helpers/AjaxHelper';
 import { AUTH_FULL_NAME_KEY, AUTH_TOKEN_KEY, FAILED, IDLE, LOADING, SUCCEEDED } from '../../constant';
-import { setLoading, setLoaded, setError, resetError } from './globalSlice';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -23,7 +22,7 @@ const loginSlice = createSlice({
       state.formStatus = FAILED;
       state.formError = action.payload;
     },
-    setFormSuccess: (state, action) => {
+    setFormSuccess: (state) => {
       state.formStatus = SUCCEEDED;
       state.formError = null;
     },

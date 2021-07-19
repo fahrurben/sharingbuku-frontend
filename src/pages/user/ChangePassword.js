@@ -2,21 +2,18 @@ import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import _ from 'lodash';
 import { toast } from 'react-toastify';
 import TextInput from '../../components/common/ui/form/TextInput';
 import { useTranslation } from 'react-i18next';
 import Button from '../../components/common/ui/Button';
 import { FAILED, SUCCEEDED } from '../../constant';
-import DateInput from '../../components/common/ui/form/DateInput';
 import { timeout } from '../../helpers/AjaxHelper';
 import { IDLE } from '../../constant';
 import ProfileSidebar from '../../components/common/ui/sidebar/ProfileSidebar';
-import Select from '../../components/common/ui/form/Select';
 import { doChangePassword, resetForm } from '../../redux/slices/changePasswordSlice';
 
 function ChangePassword() {
-  const { control, register, getValues, setValue, handleSubmit, errors: formErrors } = useForm();
+  const { register, getValues, handleSubmit, errors: formErrors } = useForm();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();

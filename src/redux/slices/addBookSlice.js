@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 import { setConfig, timeout } from '../../helpers/AjaxHelper';
 import { FAILED, IDLE, LOADING, SUCCEEDED } from '../../constant';
 import { setLoading, setLoaded, setError, resetError } from './globalSlice';
-import { setCities } from './profileSlice';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -28,7 +27,7 @@ const addBookSlice = createSlice({
       state.formStatus = FAILED;
       state.formError = action.payload;
     },
-    setFormSuccess: (state, action) => {
+    setFormSuccess: (state) => {
       state.formStatus = SUCCEEDED;
       state.formError = null;
     },
@@ -47,7 +46,7 @@ export const {
   resetForm,
 } = addBookSlice.actions;
 
-export const fetchCategories = (provinceId) => {
+export const fetchCategories = () => {
   return async (dispatch) => {
     try {
       dispatch(setLoading());
@@ -67,7 +66,7 @@ export const addBookSubmit = (book) => {
   return async (dispatch) => {
     try {
       dispatch(setFormLoading());
-      const response = await axios.post(`${baseUrl}/api/user/book`, book, setConfig());
+      await axios.post(`${baseUrl}/api/user/book`, book, setConfig());
       await setTimeout(() => {  dispatch(setFormSuccess()); }, 100);
     } catch (e) {
       dispatch(setFormError(e?.response?.data?.message));

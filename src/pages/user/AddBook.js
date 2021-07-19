@@ -128,7 +128,7 @@ function AddBook() {
                   name="title"
                   type="title"
                   label={t('Title')}
-                  required="true"
+                  required={true}
                   inputRef={register({
                     validate: {
                       requiredForNew: () => {
@@ -147,7 +147,7 @@ function AddBook() {
                   name="author"
                   type="author"
                   label={t('Author')}
-                  required="true"
+                  required={true}
                   inputRef={register({
                     validate: {
                       requiredForNew: () => {
@@ -189,7 +189,7 @@ function AddBook() {
                   name="isbn"
                   type="isbn"
                   label={t('ISBN')}
-                  required="true"
+                  required={true}
                   inputRef={register({
                     validate: {
                       requiredForNew: () => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
-import { setConfig, timeout } from '../../helpers/AjaxHelper';
+import { setConfig } from '../../helpers/AjaxHelper';
 import { FAILED, IDLE, LOADING, SUCCEEDED } from '../../constant';
 import { setLoading, setLoaded, setError, resetError } from './globalSlice';
 
@@ -49,7 +49,7 @@ const profileSlice = createSlice({
       state.formStatus = FAILED;
       state.formError = action.payload;
     },
-    setFormSuccess: (state, action) => {
+    setFormSuccess: (state) => {
       state.formStatus = SUCCEEDED;
       state.formError = null;
     },
@@ -68,22 +68,6 @@ export const {
   setFormError,
   setFormSuccess,
 } = profileSlice.actions;
-
-export const fetchProvinces = () => {
-  return async (dispatch) => {
-    try {
-      dispatch(setLoading());
-      const response = await axios.get(`${baseUrl}/api/province`, setConfig());
-      const provinces = response.data;
-      dispatch(setProvinces(provinces));
-    } catch (e) {
-      dispatch(setError(e?.response?.data));
-      dispatch(resetError());
-    } finally {
-      dispatch(setLoaded());
-    }
-  }
-};
 
 export const fetchCities = (provinceId) => {
   return async (dispatch) => {
@@ -124,7 +108,7 @@ export const updateProfile = (user) => {
   return async (dispatch) => {
     try {
       dispatch(setFormLoading());
-      const response = await axios.post(`${baseUrl}/api/user/profile`, user, setConfig());
+      await axios.post(`${baseUrl}/api/user/profile`, user, setConfig());
       await setTimeout(() => {  dispatch(setFormSuccess()); }, 100);
     } catch (e) {
       dispatch(setFormError(e?.response?.data?.message));

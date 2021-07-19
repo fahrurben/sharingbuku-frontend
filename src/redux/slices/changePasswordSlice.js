@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
-import { setConfig, timeout } from '../../helpers/AjaxHelper';
-import { AUTH_FULL_NAME_KEY, AUTH_TOKEN_KEY, FAILED, IDLE, LOADING, SUCCEEDED } from '../../constant';
-import { setLoading, setLoaded, setError, resetError } from './globalSlice';
+import { setConfig } from '../../helpers/AjaxHelper';
+import { FAILED, IDLE, LOADING, SUCCEEDED } from '../../constant';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
@@ -23,7 +22,7 @@ const changePasswordSlice = createSlice({
       state.formStatus = FAILED;
       state.formError = action.payload;
     },
-    setFormSuccess: (state, action) => {
+    setFormSuccess: (state) => {
       state.formStatus = SUCCEEDED;
       state.formError = null;
     },
@@ -45,7 +44,7 @@ export const doChangePassword = (credential) => {
   return async (dispatch) => {
     try {
       dispatch(setFormLoading());
-      const response = await axios.post(`${baseUrl}/api/user/password`, credential, setConfig());
+      await axios.post(`${baseUrl}/api/user/password`, credential, setConfig());
       dispatch(setFormSuccess());
       await setTimeout(() => {  dispatch(setFormSuccess()); }, 100);
     } catch (e) {

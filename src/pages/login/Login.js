@@ -1,16 +1,15 @@
 import React, { useEffect } from 'react';
-import { useForm, Controller } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
-import _ from 'lodash';
 import TextInput from '../../components/common/ui/form/TextInput';
 import { useTranslation } from 'react-i18next';
 import Button from '../../components/common/ui/Button';
-import { IDLE, FAILED, SUCCEEDED } from '../../constant';
+import { FAILED, SUCCEEDED } from '../../constant';
 import { doLogin, resetForm } from '../../redux/slices/loginSlice';
 
 function Login() {
-  const { control, register, getValues, handleSubmit, errors: formErrors } = useForm();
+  const { register, handleSubmit, errors: formErrors } = useForm();
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const history = useHistory();

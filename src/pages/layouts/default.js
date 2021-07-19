@@ -6,11 +6,9 @@ import BounceLoader from 'react-spinners/BounceLoader';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { AUTH_FULL_NAME_KEY, AUTH_TOKEN_KEY } from '../../constant';
-import clsx from 'clsx';
-import _ from 'lodash';
 
 export default function DefaultLayout({ children }) {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const isLoading = useSelector((state) => state.global.isLoading);
   const error = useSelector((state) => state.global.error);
   const history = useHistory();
@@ -23,7 +21,7 @@ export default function DefaultLayout({ children }) {
   }
 
   useEffect(() => {
-    const pageClickEvent = (e) => {
+    const pageClickEvent = () => {
       setShowProfile(!showProfile);
     };
 
@@ -60,8 +58,8 @@ export default function DefaultLayout({ children }) {
                   id="" type="text" placeholder="Cari"/>
                 <button
                   className="float-left h-10 block border border-gray-500 rounded rounded-l-none bg-gray-200 border-l-0 w-10">
-                  <i className="lni lni-search-alt"></i></button>
-                <div className="clear-both"></div>
+                  <i className="lni lni-search-alt"/></button>
+                <div className="clear-both"/>
               </div>
             </div>
           </div>
@@ -69,7 +67,7 @@ export default function DefaultLayout({ children }) {
             <div className="float-left relative flex flex-row items-center h-full border-l border-gray-600 p-4">
               <a href="#" onClick={toggleProfile} className="flex flex-row items-center h-full">
                 <span className="flex flex-row items-center justify-center h-10 w-10 rounded-full bg-gray-400 mr-2">
-                  <i className="lni lni-user"></i>
+                  <i className="lni lni-user"/>
                 </span>
                 <span className="display-block text-white">{fullName}</span>
                 <svg className="fill-current text-white h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -90,11 +88,11 @@ export default function DefaultLayout({ children }) {
                     <a onClick={logoutClicked}
                        className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">Logout</a>
                   </li>
-                </ul>) : <span>&nbsp;</span>
+                </ul>) : <span/>
               }
             </div>
           </div>
-          <div className="clear-both"></div>
+          <div className="clear-both"/>
         </div>
       </nav>
       {/* Main Wrapper */}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createSlice } from '@reduxjs/toolkit';
-import { setConfig, timeout } from '../../helpers/AjaxHelper';
+import { setConfig } from '../../helpers/AjaxHelper';
 import { FAILED, IDLE, LOADING, SUCCEEDED } from '../../constant';
 import { setLoading, setLoaded, setError, resetError } from './globalSlice';
 
@@ -31,7 +31,7 @@ const registerSlice = createSlice({
       state.formStatus = FAILED;
       state.formError = action.payload;
     },
-    setFormSuccess: (state, action) => {
+    setFormSuccess: (state) => {
       state.formStatus = SUCCEEDED;
       state.formError = null;
     },
@@ -87,7 +87,7 @@ export const registerUser = (user) => {
   return async (dispatch) => {
     try {
       dispatch(setFormLoading());
-      const response = await axios.post(`${baseUrl}/api/register`, user, setConfig());
+      await axios.post(`${baseUrl}/api/register`, user, setConfig());
       await setTimeout(() => {  dispatch(setFormSuccess()); }, 100);
     } catch (e) {
       dispatch(setFormError(e?.response?.data?.message));
