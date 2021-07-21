@@ -1,4 +1,5 @@
 import axios from 'axios';
+import _ from 'lodash';
 import { createSlice } from '@reduxjs/toolkit';
 import { setConfig, timeout } from '../../helpers/AjaxHelper';
 import { FAILED, IDLE, LOADING, SUCCEEDED } from '../../constant';
@@ -66,7 +67,13 @@ export const addBookSubmit = (book) => {
   return async (dispatch) => {
     try {
       dispatch(setFormLoading());
-      await axios.post(`${baseUrl}/api/user/book`, book, setConfig());
+      let formData = new FormData();
+      _.forIn(book, (value, key) => {
+        formData.append(key, value);
+      });
+      let headers = setConfig();
+      headers = {...headers, 'content-type': 'multipart/form-data'};
+      await axios.post(`${baseUrl}/api/user/book`, formData, headers);
       await setTimeout(() => {  dispatch(setFormSuccess()); }, 100);
     } catch (e) {
       dispatch(setFormError(e?.response?.data?.message));

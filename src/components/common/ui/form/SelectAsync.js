@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Controller } from 'react-hook-form';
-import _ from 'lodash';
-import clsx from 'clsx';
 import AsyncSelect from 'react-select/async/dist/react-select.esm';
 
 function SelectAsync({
@@ -28,6 +26,7 @@ function SelectAsync({
           control={control}
           name={name}
           rules={validationRules}
+          defaultValue={{}}
           render={({ onChange, onBlur, value }) => (
             <AsyncSelect
               cacheOptions

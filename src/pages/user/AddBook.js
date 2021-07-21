@@ -13,6 +13,7 @@ import axios from 'axios';
 import Select from '../../components/common/ui/form/Select';
 import { addBookSubmit, fetchCategories, resetForm } from '../../redux/slices/addBookSlice';
 import SelectAsync from '../../components/common/ui/form/SelectAsync';
+import FileInput from '../../components/common/ui/form/FileInput';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 const EXISTING = 'existing';
@@ -30,6 +31,7 @@ function AddBook() {
 
   const [defaultOptions, setDefaultOptions] = useState([]);
   const [bookSelectionType, setBookSelectionType] = useState(EXISTING);
+  const [image, setImage] = useState(null);
 
   useEffect(() => {
     axios.get(`${baseUrl}/api/book/lookup?title=A`, setConfig())
@@ -49,9 +51,14 @@ function AddBook() {
     setBookSelectionType(e.target.value);
   }
 
+  function imageChange(e) {
+    setImage(e.target.files[0]);
+  }
+
   function submit(book) {
     book.book_id = book.selectedBook?.value;
     book.is_new = bookSelectionType === NEW;
+    book.image = image;
     dispatch(addBookSubmit(book));
   }
 
@@ -204,8 +211,15 @@ function AddBook() {
             </div>
             {/* -- Form Row End -- */}
 
+            {/* -- Form Row -- */}
+            <div className="-mx-3 md:flex mb-6">
+              <div className="md:w-1/2 px-3 mb-6 md:mb-0">
+                <input id="image" type="file" name="image" onChange={imageChange} />
+              </div>
+            </div>
+
             <div className="flex flex-row-reverse gap-x-2">
-              <Button onClick={handleSubmit(submit)} disabled={formStatus !== IDLE}>
+              <Button onClick={handleSubmit(submit)}>
                 {t('Submit')}
               </Button>
 
