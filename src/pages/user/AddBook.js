@@ -13,7 +13,6 @@ import axios from 'axios';
 import Select from '../../components/common/ui/form/Select';
 import { addBookSubmit, fetchCategories, resetForm } from '../../redux/slices/addBookSlice';
 import SelectAsync from '../../components/common/ui/form/SelectAsync';
-import FileInput from '../../components/common/ui/form/FileInput';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 const EXISTING = 'existing';
