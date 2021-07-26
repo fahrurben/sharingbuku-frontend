@@ -47,12 +47,12 @@ export default function DefaultLayout({ children }) {
       active={isLoading}
       spinner={<BounceLoader/>}
     >
-      <nav className="block w-full h-auto sm:h-16 bg-indigo-900">
+      <nav className="block w-full h-auto sm:h-16 bg-indigo-900 py-2">
         <div className="container mx-auto h-full">
-          <div className="float-left h-full">
-            <div className="flex items-center h-full py-2">
-              <a href="#" className="text-xl md:text-2xl px-2 font-bold text-white">Sharing Buku</a>
-              <div className="md:ml-8">
+          <div className="float-left h-full md:w-auto">
+            <div className="flex items-center h-full">
+              <a href="#" className="text-xl md:text-2xl hidden md:inline px-2 font-bold text-white">Sharing Buku</a>
+              <div className="lg:ml-8">
                 <input
                   className="float-left appearance-none md:w-80 ml-2 block bg-gray-50 text-gray-700 border border-gray-500 rounded rounded-r-none py-2 px-2 h-10 border-r-0"
                   id="" type="text" placeholder="Cari"/>
@@ -64,18 +64,22 @@ export default function DefaultLayout({ children }) {
             </div>
           </div>
           <div className="float-right flex items-center h-full px-2 py-1">
-            <div className="float-left relative flex flex-row items-center h-full border-l border-gray-600 p-4">
-              <a href="#" onClick={toggleProfile} className="flex flex-row items-center h-full">
+            <div className="relative flex flex-row items-center h-full lg:p-4">
+              <a href="#" onClick={toggleProfile} className="flex flex-row items-center h-full" style={{minWdith: '200px'}}>
                 <span className="flex flex-row items-center justify-center h-10 w-10 rounded-full bg-gray-400 mr-2">
                   <i className="lni lni-user"/>
                 </span>
-                <span className="display-block text-white">{fullName}</span>
+                <span className="hidden lg:block text-white">{fullName}</span>
                 <svg className="fill-current text-white h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                   <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/>
                 </svg>
               </a>
               {showProfile ?
-                (<ul className="absolute text-gray-700" style={{ top: '60px', left: '0px', right: '0px' }}>
+                (<ul className="fixed lg:absolute text-gray-700" style={{ top: '52px', left: '0px', right: '0px' }}>
+                  <li>
+                    <Link to="/my_listings"
+                          className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">{t('My Books')}</Link>
+                  </li>
                   <li>
                     <Link to="/profile"
                        className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">{t('My Profile')}</Link>

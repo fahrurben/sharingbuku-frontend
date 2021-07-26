@@ -7,7 +7,7 @@ function Pagination({ current_page, total_page, gotoPage }) {
   const arrPages = _.range(total_page);
 
   return (
-    <div className="mt-4 flex flex-row justify-end">
+    <div className="mt-12 flex flex-row justify-center">
       <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
         {
           current_page > 1 &&

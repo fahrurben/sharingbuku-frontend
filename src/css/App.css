@@ -4,3 +4,8 @@
 @tailwind utilities;
 @import "~react-datepicker/dist/react-datepicker.css";
 @import 'react-toastify/dist/ReactToastify.css';
+
+.book-item-wrapper {
+    min-width: 160px;
+    max-width: 200px;
+}

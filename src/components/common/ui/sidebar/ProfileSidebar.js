@@ -11,6 +11,7 @@ function ProfileSidebar() {
   const linkActiveStyle = clsx(['block', 'p-2', 'border-b', 'w-full', 'bg-gray-200']);
 
   let links = [
+    { to: "/my_listings", label: t("My Books"), className: (pathname === "/my_listings" ? linkActiveStyle: linkStyle)},
     { to: "/profile", label: t("My Profile"), className: (pathname === "/profile" ? linkActiveStyle: linkStyle)},
     { to: "/change_password", label: t("Change Password"), className: (pathname === "/change_password" ? linkActiveStyle: linkStyle)},
   ];

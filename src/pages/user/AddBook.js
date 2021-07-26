@@ -13,6 +13,7 @@ import axios from 'axios';
 import Select from '../../components/common/ui/form/Select';
 import { addBookSubmit, fetchCategories, resetForm } from '../../redux/slices/addBookSlice';
 import SelectAsync from '../../components/common/ui/form/SelectAsync';
+import TextArea from '../../components/common/ui/form/TextArea';
 
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 const EXISTING = 'existing';
@@ -66,7 +67,7 @@ function AddBook() {
       toast.success(t('Successfully add new book'));
       timeout(2000).then(() => {
         dispatch(resetForm());
-        history.go(0);
+        history.push('/my_listings');
       });
     }
   }, [formStatus]);
@@ -132,7 +133,6 @@ function AddBook() {
                 <TextInput
                   id="title"
                   name="title"
-                  type="title"
                   label={t('Title')}
                   required={true}
                   inputRef={register({
@@ -151,7 +151,6 @@ function AddBook() {
                 <TextInput
                   id="author"
                   name="author"
-                  type="author"
                   label={t('Author')}
                   required={true}
                   inputRef={register({
@@ -170,12 +169,27 @@ function AddBook() {
 
             {/* -- Form Row -- */}
             <div className="-mx-3 md:flex mb-6">
+              <div className="w-full px-3 mb-6 md:mb-0">
+                <TextArea
+                  id="desc"
+                  name="desc"
+                  label={t('Description')}
+                  inputRef={register()}
+                  error={formErrors?.desc}
+                />
+              </div>
+            </div>
+            {/* -- Form Row End -- */}
+
+            {/* -- Form Row -- */}
+            <div className="-mx-3 md:flex mb-6">
               <div className="md:w-1/2 px-3 mb-6 md:mb-0">
                 <Select
                   id="category_id"
                   name="category_id"
                   label={t('Category')}
                   placeholder="- Category -"
+                  required={true}
                   inputRef={register({
                     validate: {
                       requiredForNew: () => {
@@ -193,7 +207,6 @@ function AddBook() {
                 <TextInput
                   id="isbn"
                   name="isbn"
-                  type="isbn"
                   label={t('ISBN')}
                   required={true}
                   inputRef={register({
@@ -222,7 +235,7 @@ function AddBook() {
                 {t('Submit')}
               </Button>
 
-              <Button onClick={() => history.push('/')} type="secondary">
+              <Button onClick={() => history.push('/my_listings')} type="secondary">
                 {t('Cancel')}
               </Button>
             </div>
