@@ -4,13 +4,21 @@ import { useHistory, Link } from 'react-router-dom';
 import LoadingOverlay from 'react-loading-overlay';
 import BounceLoader from 'react-spinners/BounceLoader';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AUTH_FULL_NAME_KEY, AUTH_TOKEN_KEY } from '../../constant';
+import { useForm } from 'react-hook-form';
+import { fetchBooks, setTitle } from '../../redux/slices/homeSlice';
 
 export default function DefaultLayout({ children }) {
   const { t } = useTranslation();
+  const { control, register, getValues, handleSubmit, errors: formErrors } = useForm();
+  const dispatch = useDispatch();
+
   const isLoading = useSelector((state) => state.global.isLoading);
   const error = useSelector((state) => state.global.error);
+  const title = useSelector((state) => state.home.title);
+  const categoryId = useSelector((state) => state.home.categoryId);
+
   const history = useHistory();
   const fullName = localStorage.getItem(AUTH_FULL_NAME_KEY);
 
@@ -42,6 +50,12 @@ export default function DefaultLayout({ children }) {
     history.push('/');
   }
 
+  function formSearchSubmitted(data) {
+    console.log(data);
+    dispatch(setTitle(data.search_key));
+    dispatch(fetchBooks(1, data.search_key, categoryId));
+  }
+
   return (
     <LoadingOverlay
       active={isLoading}
@@ -51,15 +65,17 @@ export default function DefaultLayout({ children }) {
         <div className="container mx-auto h-full">
           <div className="float-left h-full md:w-auto">
             <div className="flex items-center h-full">
-              <a href="#" className="text-xl md:text-2xl hidden md:inline px-2 font-bold text-white">Sharing Buku</a>
+              <Link to="/" className="text-xl md:text-2xl hidden md:inline px-2 font-bold text-white">Sharing Buku</Link>
               <div className="lg:ml-8">
-                <input
-                  className="float-left appearance-none md:w-80 ml-2 block bg-gray-50 text-gray-700 border border-gray-500 rounded rounded-r-none py-2 px-2 h-10 border-r-0"
-                  id="" type="text" placeholder="Cari"/>
-                <button
-                  className="float-left h-10 block border border-gray-500 rounded rounded-l-none bg-gray-200 border-l-0 w-10">
-                  <i className="lni lni-search-alt"/></button>
-                <div className="clear-both"/>
+                <form onSubmit={handleSubmit(formSearchSubmitted)}>
+                  <input
+                    className="float-left appearance-none md:w-80 ml-2 block bg-gray-50 text-gray-700 border border-gray-500 rounded rounded-r-none py-2 px-2 h-10 border-r-0"
+                    id="search_key" name="search_key" defaultValue={title} ref={register()} type="text" placeholder="Cari"/>
+                  <button
+                    className="float-left h-10 block border border-gray-500 rounded rounded-l-none bg-gray-200 border-l-0 w-10">
+                    <i className="lni lni-search-alt"/></button>
+                  <div className="clear-both"/>
+                </form>
               </div>
             </div>
           </div>

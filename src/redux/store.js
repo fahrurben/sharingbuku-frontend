@@ -6,6 +6,7 @@ import ProfileSlice from './slices/profileSlice';
 import ChangePasswordSlice from './slices/changePasswordSlice';
 import AddBookSlice from './slices/addBookSlice';
 import MyListingsSlice from './slices/myListingsSlice';
+import HomeSlice from './slices/homeSlice';
 
 export default configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export default configureStore({
     changePassword: ChangePasswordSlice,
     addBook: AddBookSlice,
     myListings: MyListingsSlice,
+    home: HomeSlice,
   },
 })
