@@ -78,7 +78,7 @@ function Home() {
               listing_data.map((book) => {
                 return (
                   <div className="book-item-wrapper w-1/2 sm:w-1/3 md:w-1/5 px-2">
-                    <a href="#" className="book-item mt-3 pb-2 block border hover:shadow-xl">
+                    <Link to={`/book/${book.id}`} className="book-item mt-3 pb-2 block border hover:shadow-xl">
                       <div className="thumbnail overflow-hidden" style={{height: '200px'}}>
                         {
                           book.image ?
@@ -87,7 +87,7 @@ function Home() {
                         }
                       </div>
                       <h6 className="title p-2 overflow-hidden"  style={{height: '60px'}}>{book.title}</h6>
-                    </a>
+                    </Link>
                   </div>
                 );
               })
