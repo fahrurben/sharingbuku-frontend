@@ -9,6 +9,8 @@ import MyListingsSlice from './slices/myListingsSlice';
 import HomeSlice from './slices/homeSlice';
 import BookDetailsSlice from './slices/bookDetailsSlice';
 import RequestBook from './slices/requestBookSlice';
+import MyRequestListSlice from './slices/myRequestSlice';
+import CancelRequest from './slices/cancelRequestSlice';
 
 export default configureStore({
   reducer: {
@@ -22,5 +24,7 @@ export default configureStore({
     home: HomeSlice,
     bookDetails: BookDetailsSlice,
     requestBook: RequestBook,
+    myRequestList: MyRequestListSlice,
+    cancelRequest: CancelRequest,
   },
 })

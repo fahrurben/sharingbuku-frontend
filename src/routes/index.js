@@ -10,6 +10,7 @@ import ChangePassword from '../pages/user/ChangePassword';
 import AddBook from '../pages/user/AddBook';
 import MyListings from '../pages/user/MyListings';
 import BookDetails from '../pages/book/Details';
+import MyRequestList from '../pages/user/MyRequestList';
 
 export default function Routes() {
   return (
@@ -20,6 +21,7 @@ export default function Routes() {
       <Route path="/my_listings" exact component={MyListings} isPrivate={true}/>
       <Route path="/add_book" exact component={AddBook} isPrivate={true}/>
       <Route path="/book/:id" exact component={BookDetails} isPrivate={true}/>
+      <Route path="/my_request_list" exact component={MyRequestList} isPrivate={true}/>
       <Route path="/" exact component={Home} isPrivate={true}/>
 
       {/* redirect user to SignIn page if route does not exist and user is not authenticated */}

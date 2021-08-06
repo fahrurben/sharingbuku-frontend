@@ -12,3 +12,19 @@ export const FAILED = 'failed';
 
 export const YES = 'Yes';
 export const NO = 'No';
+
+export const DATE_DISPLAY_FORMAT = 'D MMM YYYY';
+
+export const STATUS_REQUEST = 0;
+export const STATUS_APPROVED = 1;
+export const STATUS_CANCELLED = 2;
+export const STATUS_REJECTED = 3;
+export const STATUS_SENDING = 4;
+export const STATUS_RECEIVED = 5;
+export const STATUS_SENDING_BACK = 6;
+export const STATUS_RECEIVED_BACK = 7;
+
+export const STATUS_LABEL = [
+  'Requesting'
+];
+
