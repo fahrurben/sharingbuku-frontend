@@ -11,6 +11,9 @@ import BookDetailsSlice from './slices/bookDetailsSlice';
 import RequestBook from './slices/requestBookSlice';
 import MyRequestListSlice from './slices/myRequestSlice';
 import CancelRequest from './slices/cancelRequestSlice';
+import IncomingRequestListSlice from './slices/incomingRequestListSlice';
+import ApproveRequestSlice from './slices/approveRequestSlice';
+import RejectRequestSlice from './slices/rejectRequestSlice';
 
 export default configureStore({
   reducer: {
@@ -26,5 +29,8 @@ export default configureStore({
     requestBook: RequestBook,
     myRequestList: MyRequestListSlice,
     cancelRequest: CancelRequest,
+    incomingRequestList: IncomingRequestListSlice,
+    approveRequest: ApproveRequestSlice,
+    rejectRequest: RejectRequestSlice,
   },
 })
