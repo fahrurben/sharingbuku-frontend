@@ -14,6 +14,8 @@ import CancelRequest from './slices/cancelRequestSlice';
 import IncomingRequestListSlice from './slices/incomingRequestListSlice';
 import ApproveRequestSlice from './slices/approveRequestSlice';
 import RejectRequestSlice from './slices/rejectRequestSlice';
+import SendBookSlice from './slices/sendBookSlice';
+import SendBackSlice from './slices/sendBackSlice';
 
 export default configureStore({
   reducer: {
@@ -32,5 +34,7 @@ export default configureStore({
     incomingRequestList: IncomingRequestListSlice,
     approveRequest: ApproveRequestSlice,
     rejectRequest: RejectRequestSlice,
+    sendBook: SendBookSlice,
+    sendBack: SendBackSlice,
   },
 })

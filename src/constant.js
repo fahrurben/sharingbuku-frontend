@@ -25,6 +25,40 @@ export const STATUS_SENDING_BACK = 6;
 export const STATUS_RECEIVED_BACK = 7;
 
 export const STATUS_LABEL = [
-  'Requesting'
+  'Requested',
+  'Approved',
+  'Cancelled',
+  'Rejected',
+  'Sending',
+  'Received',
+  'Sending Back',
+  'Received Back',
 ];
+
+export function getNextStep(status, isOwner = false) {
+  if (!isOwner) {
+    switch (status) {
+      case STATUS_APPROVED:
+        return 'Waiting for owner send the book';
+      case STATUS_SENDING:
+        return 'Waiting for the book delivery';
+      case STATUS_SENDING_BACK:
+        return 'Waiting for the book received by owner';
+      default:
+        return '';
+    }
+  } else {
+    switch (status) {
+      case STATUS_SENDING:
+        return 'Waiting for the book received by requestor';
+      case STATUS_RECEIVED:
+        return 'Book is borrowed by requestor';
+      case STATUS_SENDING_BACK:
+        return 'Waiting for the book delivery';
+      default:
+        return '';
+    }
+  }
+
+}
 
