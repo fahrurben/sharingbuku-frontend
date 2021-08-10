@@ -92,54 +92,78 @@ function MyRequestList() {
           <h3 className="float-left text-2xl font-bold">{t('My Request')}</h3>
           <div className="clear-both">&nbsp;</div>
         </div>
-        {/* Table part */}
         <div className="mt-2">
-          <table className="table-auto w-full">
-            <thead className="">
-            <tr className="bg-green-600">
-              <th className="px-16 py-2">
-                <span className="text-gray-100 font-semibold">{t('Title')}</span>
-              </th>
-              <th className="px-16 py-2">
-                <span className="text-gray-100 font-semibold">{t('Requested At')}</span>
-              </th>
-              <th className="px-16 py-2">
-                <span className="text-gray-100 font-semibold">{t('Approved At')}</span>
-              </th>
-              <th className="px-16 py-2">
-                <span className="text-gray-100 font-semibold">{t('Send At')}</span>
-              </th>
-              <th className="px-16 py-2">
-                <span className="text-gray-100 font-semibold">{t('Send Back At')}</span>
-              </th>
-              <th className="px-16 py-2">
-                <span className="text-gray-100 font-semibold">{t('Status')}</span>
-              </th>
-              <th className="px-16 py-2">
-                <span className="text-gray-100 font-semibold">{t('Actions')}</span>
-              </th>
+          {
+            data &&
+            data.map((trans) => {
+              const requested_at = trans?.requested_at ? moment(trans?.requested_at).format(DATE_DISPLAY_FORMAT) : '-';
+              const approved_at = trans?.approved_at ? moment(trans?.approved_at).format(DATE_DISPLAY_FORMAT) : '-';
+              const send_at = trans?.send_at ? moment(trans?.send_at).format(DATE_DISPLAY_FORMAT) : '-';
+              const received_at = trans?.received_at ? moment(trans?.received_at).format(DATE_DISPLAY_FORMAT) : '-';
+              const send_back_at = trans?.send_back_at ? moment(trans?.send_back_at).format(DATE_DISPLAY_FORMAT) : '-';
+              const received_back_at = trans?.received_back_at ? moment(trans?.received_back_at).format(DATE_DISPLAY_FORMAT) : '-';
+              const next_step = getNextStep(trans?.status);
 
-            </tr>
-            </thead>
-            <tbody className="bg-gray-200">
-            {
-              data &&
-              data.map((trans) => {
-                const requested_at = trans?.requested_at ? moment(trans?.requested_at).format(DATE_DISPLAY_FORMAT) : '';
-                const approved_at = trans?.approved_at ? moment(trans?.approved_at).format(DATE_DISPLAY_FORMAT) : '';
-                const send_at = trans?.send_at ? moment(trans?.send_at).format(DATE_DISPLAY_FORMAT) : '';
-                const send_back_at = trans?.send_back_at ? moment(trans?.send_back_at).format(DATE_DISPLAY_FORMAT) : '';
-
-                return (
-                  <tr className="bg-white border-b-2 border-gray-200">
-                    <td className="px-4 py-3">{trans?.listing?.book?.title}</td>
-                    <td className="px-4 py-3">{requested_at}</td>
-                    <td className="px-4 py-3">{approved_at}</td>
-                    <td className="px-4 py-3">{send_at}</td>
-                    <td className="px-4 py-3">{send_back_at}</td>
-                    <td align="center" className="px-4 py-3">{STATUS_LABEL[trans?.status]}</td>
-                    <td align="center">
-                      {getNextStep(trans?.status)}
+              return (
+                <div
+                  className="w-full border border-gray-300 bg-white rounded px-6 py-6 flex flex-col justify-between leading-normal">
+                  <h3 className="text-gray-900 font-bold text-xl mb-2">{trans?.listing?.book?.title}</h3>
+                  <div className="flex flex-row flex-wrap gap-y-5">
+                    <div className="w-full md:w-1/3">
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Status')}</span>
+                        :<span className="flex-grow text-right">{STATUS_LABEL[trans?.status]}</span>
+                      </div>
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Resolution')}</span>
+                        :<span className="flex-grow text-right">{trans.resolution}</span>
+                      </div>
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Requested At')}</span>
+                        :<span className="flex-grow text-right">{requested_at}</span>
+                      </div>
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Approved At')}</span>
+                        :<span className="flex-grow text-right">{approved_at}</span>
+                      </div>
+                    </div>
+                    <div className="w-full md:w-1/3 md:pl-3 md:pr-3">
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Send At')}</span>
+                        :<span className="flex-grow text-right">{send_at}</span>
+                      </div>
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Send Receipt')}</span>
+                        :<span className="flex-grow text-right">{trans.receipt ?? '-'}</span>
+                      </div>
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Received At')}</span>
+                        :<span className="flex-grow text-right">{received_at}</span>
+                      </div>
+                    </div>
+                    <div className="w-full md:w-1/3">
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Send Back At')}</span>
+                        :<span className="flex-grow text-right">{send_back_at}</span>
+                      </div>
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Send Back Receipt')}</span>
+                        :<span className="flex-grow text-right">{trans.send_back_receipt ?? '-'}</span>
+                      </div>
+                      <div className="flex flex-row">
+                        <span className="display-block flex-grow-0 w-32">{t('Received Back At')}</span>
+                        :<span className="flex-grow text-right">{received_back_at}</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="mt-4">
+                    <div className="float-left">
+                      {
+                        next_step &&
+                        <div className="bg-gray-100 px-3 py-2 rounded-lg">{next_step}</div>
+                      }
+                    </div>
+                    <div className="float-right">
                       {
                         trans.status === STATUS_REQUEST &&
                         <Button
@@ -150,19 +174,19 @@ function MyRequestList() {
                         <Button
                           onClick={() => sendBackClicked(trans.id, trans?.listing?.book?.title)}>Send Back</Button>
                       }
-                    </td>
-                  </tr>
-                )
-              })
-            }
-            </tbody>
-          </table>
+                    </div>
+                  </div>
+
+                </div>
+              );
+            })
+          }
           <Pagination
             current_page={meta.current_page}
             total_page={meta.last_page}
             gotoPage={gotoPage}/>
         </div>
-        {/* Table part end */}
+
       </div>
       <Modal
         isOpen={isCancelRequestModalShow}
