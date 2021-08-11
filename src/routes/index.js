@@ -1,5 +1,5 @@
-import React from 'react';
-import { Switch } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Switch, useHistory, useLocation } from 'react-router-dom';
 import Route from './Route';
 import Register from '../pages/register/Register';
 import Login from '../pages/login/Login';
@@ -12,8 +12,38 @@ import MyListings from '../pages/user/MyListings';
 import BookDetails from '../pages/book/Details';
 import MyRequestList from '../pages/user/MyRequestList';
 import IncomingRequestList from '../pages/user/IncomingRequestList';
+import { resetError, setError, setLoaded, setLoading } from '../redux/slices/globalSlice';
+import axios from 'axios';
+import { setConfig } from '../helpers/AjaxHelper';
+import { setRequestListData } from '../redux/slices/myRequestSlice';
+import { AUTH_FULL_NAME_KEY, AUTH_TOKEN_KEY } from '../constant';
+
+const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
 export default function Routes() {
+  const history = useHistory();
+  const location = useLocation();
+
+  useEffect(async () => {
+    const pathname = location.pathname;
+    if (pathname !== '/login' || pathname !== '/register') {
+      try {
+        const response = await axios.get(`${baseUrl}/api/user/profile`, setConfig());
+        if (!response.data) {
+          history.push('/login');
+          localStorage.removeItem(AUTH_TOKEN_KEY);
+          localStorage.removeItem(AUTH_FULL_NAME_KEY);
+        }
+      } catch (e) {
+        history.push('/login');
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+        localStorage.removeItem(AUTH_FULL_NAME_KEY);
+      } finally {
+      }
+    }
+
+  }, [location]);
+
   return (
     <Switch>
       <Route path="/register" exact component={Register} />

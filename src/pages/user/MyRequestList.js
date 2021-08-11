@@ -88,11 +88,11 @@ function MyRequestList() {
         <ProfileSidebar/>
       </aside>
       <div className="flex-auto px-6">
-        <div className="py-2 border-b mb-4">
+        <div className="py-3 border-b">
           <h3 className="float-left text-2xl font-bold">{t('My Request')}</h3>
-          <div className="clear-both">&nbsp;</div>
+          <div className="clear-both" />
         </div>
-        <div className="mt-2">
+        <div className="mt-4">
           {
             data &&
             data.map((trans) => {

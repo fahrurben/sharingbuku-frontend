@@ -61,11 +61,12 @@ export default function DefaultLayout({ children }) {
       active={isLoading}
       spinner={<BounceLoader/>}
     >
-      <nav className="block w-full h-auto sm:h-16 bg-indigo-900 py-2">
+      <nav className="block w-full h-16 bg-indigo-900">
         <div className="container mx-auto h-full">
           <div className="float-left h-full md:w-auto">
             <div className="flex items-center h-full">
-              <Link to="/" className="text-xl md:text-2xl hidden md:inline px-2 font-bold text-white">Sharing Buku</Link>
+              <Link to="/" className="hidden md:inline text-xl md:text-2xl px-2 font-bold text-white">Sharing Buku</Link>
+              <Link to="/" className="inline md:hidden text-xl md:text-2xl px-2 font-bold text-white">Home</Link>
               <div className="lg:ml-8">
                 <form onSubmit={handleSubmit(formSearchSubmitted)}>
                   <input
@@ -79,8 +80,8 @@ export default function DefaultLayout({ children }) {
               </div>
             </div>
           </div>
-          <div className="float-right flex items-center h-full px-2 py-1">
-            <div className="relative flex flex-row items-center h-full lg:p-4">
+          <div className="relative float-right flex items-center h-full px-2 py-1">
+            <div className="flex flex-row items-center h-full lg:p-4">
               <a href="#" onClick={toggleProfile} className="flex flex-row items-center h-full" style={{minWdith: '200px'}}>
                 <span className="flex flex-row items-center justify-center h-10 w-10 rounded-full bg-gray-400 mr-2">
                   <i className="lni lni-user"/>
@@ -91,7 +92,7 @@ export default function DefaultLayout({ children }) {
                 </svg>
               </a>
               {showProfile ?
-                (<ul className="fixed lg:absolute text-gray-700" style={{ top: '52px', left: '0px', right: '0px' }}>
+                (<ul className="fixed lg:absolute text-gray-700 z-50" style={{ top: '4rem', left: '0px', right: '0px' }}>
                   <li>
                     <Link to="/my_listings"
                           className="bg-gray-200 hover:bg-gray-400 py-2 px-4 block whitespace-no-wrap" href="#">{t('My Books')}</Link>

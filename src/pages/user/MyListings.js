@@ -35,10 +35,10 @@ function MyListings() {
         <ProfileSidebar/>
       </aside>
       <div className="flex-auto px-6">
-        <div className="py-2 border-b mb-4">
+        <div className="py-3 border-b">
           <h3 className="float-left text-2xl font-bold">My Books</h3>
           <div className="float-right"><Button onClick={addBookClicked}>Add Book</Button></div>
-          <div className="clear-both">&nbsp;</div>
+          <div className="clear-both" />
         </div>
 
         <div className="flex-auto py-4">

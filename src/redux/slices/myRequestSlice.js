@@ -20,7 +20,6 @@ const myRequestListSlice = createSlice({
   initialState: initialState,
   reducers: {
     setRequestListData: (state, action) => {
-      console.log('hi2');
       state.data = action.payload.data;
       state.meta = action.payload.meta;
     },
