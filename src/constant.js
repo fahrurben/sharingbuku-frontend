@@ -35,6 +35,14 @@ export const STATUS_LABEL = [
   'Received Back',
 ];
 
+export const RESOLUTION_LABEL = [
+  'None',
+  'Finished',
+  'Canceled',
+  'Rejected',
+  'Un-finished',
+];
+
 export function getNextStep(status, isOwner = false) {
   if (!isOwner) {
     switch (status) {

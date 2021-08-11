@@ -8,7 +8,7 @@ import Button from '../../components/common/ui/Button';
 import { fetchMyRequestList } from '../../redux/slices/myRequestSlice';
 import {
   DATE_DISPLAY_FORMAT,
-  getNextStep,
+  getNextStep, RESOLUTION_LABEL,
   STATUS_LABEL,
   STATUS_RECEIVED,
   STATUS_REQUEST,
@@ -116,7 +116,7 @@ function MyRequestList() {
                       </div>
                       <div className="flex flex-row">
                         <span className="display-block flex-grow-0 w-32">{t('Resolution')}</span>
-                        :<span className="flex-grow text-right">{trans.resolution}</span>
+                        :<span className="flex-grow text-right">{RESOLUTION_LABEL[trans?.resolution]}</span>
                       </div>
                       <div className="flex flex-row">
                         <span className="display-block flex-grow-0 w-32">{t('Requested At')}</span>
